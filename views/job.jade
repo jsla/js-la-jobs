@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  .job
+    .summary
+      .position
+        = position
+      .date
+        = date
+      .company
+        = company
+      .location
+        | Location:
+        = location
+      .url
+        = url
+
+    .body
+      != jobBody
