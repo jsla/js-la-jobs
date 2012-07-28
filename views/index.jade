@@ -12,8 +12,9 @@ block content
         th Date
 
     tbody
-      tr
-        td Venice, CA
-        td Front-end Developer
-        td Google
-        td July 28
+      each job in jobs
+        tr
+          td= job.location
+          td= job.position
+          td= job.company
+          td= job.date
