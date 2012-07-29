@@ -1,27 +1,27 @@
 extends layout
 
 block content
-  h1 LA.js Job Board
+  
+  .page-header
+    h1 LA.js Job Board
 
   .new
     a(href='/jobs/new') Create Job Posting
 
-  table.table.table-striped
-    thead
-      tr
-        th Location
-        th Position
-        th Company
-        th Posted
+  .jobs.row.span12
 
-    tbody
+    table.table.table-striped.table-bordered
       each job in jobs
-        - console.log(job._id)
         tr
           td
             a(href="/jobs/#{job._id}")
-              = job.location
-          td= job.position
-          td= job.company
-          td
-            time.timeago(datetime=job.created_at.toISOString())
+              span.position
+                = job.position
+              | at
+              span.company
+                = job.company
+              span.location
+                = job.location
+              span.created_at
+                time.timeago(datetime=job.created_at.toISOString())
+              

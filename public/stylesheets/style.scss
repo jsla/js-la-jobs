@@ -1,0 +1,26 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+textarea.posting_body {
+  height: 300px;
+}
+
+.jobs {
+
+  a {
+    color: #333;
+  }
+
+  a:hover {
+    text-decoration: none
+  };
+
+  span {
+    margin-right: 10px;
+  }
+}
