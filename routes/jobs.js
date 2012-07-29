@@ -3,6 +3,14 @@ var markdown = require('markdown').markdown.toHTML;
 
 var Job = require('../models/job')
 
+var auth = function(req, res, next) {
+  if (req.user) {
+    next()  
+  } else {
+    res.redirect('/login')
+  }
+};
+
 module.exports = function(app) {
   
   app.get('/jobs', function(req, res) {
@@ -18,11 +26,11 @@ module.exports = function(app) {
     })
   });
 
-  app.get('/jobs/new', function(req, res) {
+  app.get('/jobs/new', auth, function(req, res) {
     res.render('jobs/new', {title: 'New Posting | LA.js Job Board'});
   });
 
-  app.post('/jobs/create', function(req, res) {
+  app.post('/jobs/create', auth, function(req, res) {
     var job = new Job(req.body)
     job.created_at = new Date()
     job.save()

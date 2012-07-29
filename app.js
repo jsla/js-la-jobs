@@ -5,6 +5,7 @@
 
 var express = require('express')
   , jobs = require('./routes/jobs')
+  , accounts = require('./routes/accounts')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose');
@@ -27,7 +28,8 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-jobs(app);
+accounts(app)
+jobs(app)
 
 app.get('/', function(req, res) { res.redirect('/jobs') })
 
