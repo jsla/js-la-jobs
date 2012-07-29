@@ -13,13 +13,13 @@ module.exports = function(app) {
       if (err) {
         res.send(500)
       } else {
-        res.render('index', { title: 'LA.js Job Board', jobs: jobs })
+        res.render('jobs/index', { title: 'LA.js Job Board', jobs: jobs })
       }
     })
   });
 
   app.get('/jobs/new', function(req, res) {
-    res.render('job_new', {title: 'New Posting | LA.js Job Board'});
+    res.render('jobs/new', {title: 'New Posting | LA.js Job Board'});
   });
 
   app.post('/jobs/create', function(req, res) {
@@ -38,7 +38,7 @@ module.exports = function(app) {
       } else if (job) {
         var body = markdown(job.body)
 
-        res.render('job', {
+        res.render('jobs/show', {
             title: 'Front-End Developer | LA.js Job Board'
           , job: job
           , body: body
