@@ -4,7 +4,7 @@ mongoose.connect('mongodb://localhost/jsla_jobs');
 
 var JobSchema = new Schema({
     company: String
-  , website: String
+  , company_url: String
   , logo: String
   , location: String
   , position: String

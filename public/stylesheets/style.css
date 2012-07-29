@@ -1,14 +1,17 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font-size: 14px; }
 
 textarea.posting_body {
   height: 300px; }
+
+.new {
+  float: right; }
 
 .jobs a:hover {
   text-decoration: none; }
 .jobs span {
   margin-right: 5px; }
-.jobs .filler {
+.jobs .filler, .jobs .created_at {
   color: #999; }
 .jobs .company {
   font-weight: bold; }
@@ -16,4 +19,4 @@ textarea.posting_body {
   text-decoration: underline; }
 .jobs .created_at {
   float: right;
-  font-size: 90%; }
+  font-size: 80%; }
