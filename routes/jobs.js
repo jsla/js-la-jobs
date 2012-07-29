@@ -5,9 +5,9 @@ var Job = require('../models/job')
 
 module.exports = function(app) {
   
-  app.get('/', function(req, res) {
+  app.get('/jobs', function(req, res) {
 
-    var fields = ['location', 'position', 'company', 'date']
+    var fields = ['location', 'position', 'company', 'created_at']
 
     Job.find({}, fields, function(err, jobs) {
       if (err) {
@@ -17,10 +17,6 @@ module.exports = function(app) {
       }
     })
   });
-
-  app.get('/jobs', function(req, res) {
-    res.redirect('/');
-  })
 
   app.get('/jobs/new', function(req, res) {
     res.render('job_new', {title: 'New Posting | LA.js Job Board'});

@@ -12,7 +12,7 @@ block content
         th Location
         th Position
         th Company
-        th Date
+        th Posted
 
     tbody
       each job in jobs
@@ -20,4 +20,5 @@ block content
           td= job.location
           td= job.position
           td= job.company
-          td= job.date
+          td
+            time.timeago(datetime=job.created_at.toISOString())
