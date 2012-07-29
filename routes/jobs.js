@@ -1,26 +1,7 @@
 var fs = require('fs');
 var markdown = require('markdown').markdown.toHTML;
 
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/jsla_jobs');
-
-var JobSchema = new Schema({
-    company: String
-  , website: String
-  , logo: String
-  , location: String
-  , position: String
-  , body: String
-  , created_at: Date
-})
-
-JobSchema.pre('save', function(next) {
-  this.created_at = this.created_at || new Date();
-  next();
-})
-
-var Job = mongoose.model('Job', JobSchema)
+var Job = require('../models/job')
 
 module.exports = function(app) {
   
@@ -47,8 +28,9 @@ module.exports = function(app) {
 
   app.post('/jobs/create', function(req, res) {
     var job = new Job(req.body)
-    job.save();
-    res.send(200);
+    job.created_at = new Date()
+    job.save()
+    res.redirect('/')
   });
 
   app.get('/jobs/:job_id', function(req, res) {
