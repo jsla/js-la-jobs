@@ -1,15 +1,19 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
-a {
-  color: #00B7FF; }
-
 textarea.posting_body {
   height: 300px; }
 
-.jobs a {
-  color: #333; }
 .jobs a:hover {
   text-decoration: none; }
 .jobs span {
-  margin-right: 10px; }
+  margin-right: 5px; }
+.jobs .filler {
+  color: #999; }
+.jobs .company {
+  font-weight: bold; }
+.jobs .position {
+  text-decoration: underline; }
+.jobs .created_at {
+  float: right;
+  font-size: 90%; }

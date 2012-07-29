@@ -5,23 +5,25 @@ block content
   .page-header
     h1 LA.js Job Board
 
-  .new
-    a(href='/jobs/new') Create Job Posting
+    .new
+      a(href='/jobs/new') Create Job Posting
 
-  .jobs.row.span12
+  .jobs.row
+    .span12
 
-    table.table.table-striped.table-bordered
-      each job in jobs
-        tr
-          td
-            a(href="/jobs/#{job._id}")
-              span.position
-                = job.position
-              | at
-              span.company
-                = job.company
-              span.location
-                = job.location
-              span.created_at
-                time.timeago(datetime=job.created_at.toISOString())
-              
+      table.table.table-striped.table-bordered
+        each job in jobs
+          tr
+            td
+              a(href="/jobs/#{job._id}")
+                span.position
+                  = job.position
+                span.filler at
+                span.company
+                  = job.company
+                span.filler in
+                span.location
+                  = job.location
+                span.created_at
+                  time.timeago(datetime=job.created_at.toISOString())
+                
