@@ -29,19 +29,24 @@ module.exports = function(app) {
     res.redirect('/')
   });
 
-  app.get('/jobs/:job_id', function(req, res) {
-    var jobMd = fs.readFileSync('./tmp/job.md').toString();
-    var jobHtml = markdown(jobMd);
+  app.get('/jobs/:id', function(req, res) {
 
-    res.render('job', {
-      title: 'Front-End Developer | LA.js Job Board',
-      position: 'Front-End Developer',
-      date: 'July 27, 2012',
-      company: 'SecondMarket',
-      url: 'http://www.secondmarket.com',
-      location: 'Santa Monica',
-      jobBody: jobHtml
-    });  
+    Job.findById(req.params.id, function(err, job) {
+
+      if (err) {
+        res.send(404)
+      } else if (job) {
+        var body = markdown(job.body)
+
+        res.render('job', {
+            title: 'Front-End Developer | LA.js Job Board'
+          , job: job
+          , body: body
+        });  
+      }
+
+    })
+
   });
 
 

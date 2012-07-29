@@ -16,8 +16,11 @@ block content
 
     tbody
       each job in jobs
+        - console.log(job._id)
         tr
-          td= job.location
+          td
+            a(href="/jobs/#{job._id}")
+              = job.location
           td= job.position
           td= job.company
           td

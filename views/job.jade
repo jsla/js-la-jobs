@@ -4,16 +4,16 @@ block content
   .job
     .summary
       .position
-        = position
+        = job.position
       .date
-        = date
+        = job.created_at
       .company
-        = company
+        = job.company
       .location
         | Location:
-        = location
+        = job.location
       .url
-        = url
+        = job.company_url
 
     .body
-      != jobBody
+      != body
