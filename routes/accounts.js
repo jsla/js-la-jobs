@@ -21,7 +21,7 @@ module.exports = function(app) {
         req.session.currentUser = body.email
         res.send(body)
       } else {
-        send(500)
+        res.send(500)
       }
     }
 
