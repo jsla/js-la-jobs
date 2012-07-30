@@ -10,6 +10,8 @@ var JobSchema = new Schema({
   , position: String
   , body: String
   , created_at: Date
+  , activated_at: Date
+  , created_by: String
 })
 
 var Job = mongoose.model('Job', JobSchema)

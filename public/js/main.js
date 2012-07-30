@@ -1,12 +1,16 @@
 (function() {
 
   var auth = function(token) {
+    var onSuccess = function(data) {
+      console.log('Login Successful', data)
+      window.location = '/jobs/new'
+    }
+
     var opts = {
         url: '/login'
-      , success: function() {
-          console.log('success!!')
-        }
+      , success: onSuccess
       , data: {token:token}
+      , type: 'POST'
     }
     $.ajax(opts)
   }

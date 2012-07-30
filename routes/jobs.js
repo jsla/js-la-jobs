@@ -4,7 +4,9 @@ var markdown = require('markdown').markdown.toHTML;
 var Job = require('../models/job')
 
 var auth = function(req, res, next) {
-  if (req.user) {
+  console.log('url', req.url)
+  console.log('session', req.session)
+  if (req.session.currentUser) {
     next()  
   } else {
     res.redirect('/login')
@@ -15,15 +17,29 @@ module.exports = function(app) {
   
   app.get('/jobs', function(req, res) {
 
-    var fields = ['location', 'position', 'company', 'created_at']
+    var conditions = {}
+    var sort = 'created_at'
 
-    Job.find({}, fields, function(err, jobs) {
+    var fields = {
+        location: 1
+      , position: 1
+      , company: 1
+      , created_at: 1
+    }
+
+    var query = Job
+      .where(conditions)
+      .select(fields)
+      .sort(sort,-1)
+
+    query.exec(function(err, jobs) {
       if (err) {
         res.send(500)
       } else {
         res.render('jobs/index', { title: 'LA.js Job Board', jobs: jobs })
       }
     })
+
   });
 
   app.get('/jobs/new', auth, function(req, res) {
