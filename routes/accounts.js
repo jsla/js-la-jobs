@@ -8,7 +8,8 @@ module.exports = function(app) {
 
   app.post('/login', function(req, res) {
     var token = req.body.token
-    var audience = 'http://localhost:3000'
+
+    var audience = 'http://' + req.headers.host
     
     var reqOpts = {
         url: 'https://browserid.org/verify'
