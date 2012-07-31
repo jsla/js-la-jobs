@@ -80,6 +80,24 @@ module.exports = function(app, helpers) {
     })
 
   })
+
+  app.get('/jobs/activate/:id', function(req, res) {
+    var conditions = {
+        created_by: req.session.currentUser
+      , _id: req.params.id
+    }
+    var update = {
+        activated_at: new Date
+    }
+
+    Job.update(conditions, update, function(err, nAffected) {
+      if (err) {
+        res.send(500)
+      } else {
+        res.redirect('/my/jobs')
+      }
+    })
+  })
   
   app.get('/jobs/:id', function(req, res) {
 
