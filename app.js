@@ -32,8 +32,19 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-accounts(app)
-jobs(app)
+var middleware = {
+  auth: function(req, res, next) {
+    if (req.session.currentUser) {
+      next()  
+    } else {
+      req.session.desiredUrl = req.url
+      res.redirect('/login')
+    }
+  }
+}
+
+accounts(app, middleware)
+jobs(app, middleware)
 
 app.get('/', function(req, res) { res.redirect('/jobs') })
 

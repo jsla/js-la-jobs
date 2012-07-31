@@ -3,7 +3,7 @@
   var auth = function(token) {
     var onSuccess = function(data) {
       console.log('Login Successful', data)
-      window.location = '/jobs/new'
+      window.location = data
     }
 
     var opts = {
