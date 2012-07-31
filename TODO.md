@@ -2,12 +2,8 @@
 
 In no particular order
 
-* Postings should be associated with user account
-* Postings should be "inactive" by default
+* Views should be dry'd up, partials could de-dupe some markup
 * Postings should become "active" after payment
-* Postings should be editable by user
-* User should be able to access "user postings list"
-* "User postings list" should list user's "active" and "inactive" postings
 * Postings should be searchable
 * Postings should have tags
 * New postings should ensure valid fields
