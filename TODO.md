@@ -10,3 +10,5 @@ In no particular order
 * "User postings list" should list user's "active" and "inactive" postings
 * Postings should be searchable
 * Postings should have tags
+* New postings should ensure valid fields
+* Postings list should be paginated
