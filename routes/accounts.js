@@ -29,7 +29,7 @@ module.exports = function(app, helpers) {
       if (err) {
         res.send(500)
       } else {
-        var thirtyDaysAgo = new Date(new Date() - (30 * 24 * 3600 * 1000))
+        var thirtyDaysAgo = helpers.getThirtyDaysAgo()
         var activeJobs = []
         var inactiveJobs = []
 

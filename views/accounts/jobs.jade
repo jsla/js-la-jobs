@@ -28,7 +28,7 @@ block content
                   span.location
                     = job.location
                   span.created_at
-                    time.timeago(datetime=job.created_at.toISOString())
+                    time.timeago(datetime=job.activated_at.toISOString())
               td
                 a(href="/jobs/edit/#{job._id}")
                   | Edit
@@ -55,8 +55,9 @@ block content
                     span.filler in
                     span.location
                       = job.location
-                    span.created_at
-                      time.timeago(datetime=job.created_at.toISOString())
+                    if job.activated_at
+                      span.created_at
+                        time.timeago(datetime=job.activated_at.toISOString())
                 td
                   a(href="/jobs/edit/#{job._id}")
                     | Edit

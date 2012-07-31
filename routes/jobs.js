@@ -16,16 +16,8 @@ module.exports = function(app, helpers) {
 
     var sort = 'created_at'
 
-    var fields = {
-        location: 1
-      , position: 1
-      , company: 1
-      , created_at: 1
-    }
-
     var query = Job
       .find(conditions)
-      .select(fields)
       .sort(sort,-1)
 
     console.log(query)
@@ -34,7 +26,7 @@ module.exports = function(app, helpers) {
       if (err) {
         res.send(500)
       } else {
-        res.render('jobs/index', { title: 'LA.js Job Board', jobs: jobs })
+        res.render('jobs/index', { title: 'LA.js Job Board', jobs: jobs, currentUser: req.session.currentUser })
       }
     })
 

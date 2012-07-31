@@ -8,6 +8,10 @@ block content
     .new
       a(href='/jobs/new') Create Job Posting
 
+    if currentUser
+      .my-jobs
+        a(href='/my/jobs') View My Jobs
+
   .jobs.row
     .span12
 
@@ -25,5 +29,5 @@ block content
                 span.location
                   = job.location
                 span.created_at
-                  time.timeago(datetime=job.created_at.toISOString())
+                  time.timeago(datetime=job.activated_at.toISOString())
                 
