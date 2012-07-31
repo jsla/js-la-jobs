@@ -8,3 +8,5 @@ In no particular order
 * Postings should be editable by user
 * User should be able to access "user postings list"
 * "User postings list" should list user's "active" and "inactive" postings
+* Postings should be searchable
+* Postings should have tags
