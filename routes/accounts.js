@@ -2,9 +2,9 @@ var request = require('request')
 
 var Job = require('../models/job')
 
-module.exports = function(app, middleware) {
+module.exports = function(app, helpers) {
 
-  app.get('/my/postings', middleware.auth, function(req, res) {
+  app.get('/my/jobs', helpers.auth, function(req, res) {
 
     var conditions = {
         created_by: req.session.currentUser
@@ -17,6 +17,7 @@ module.exports = function(app, middleware) {
       , position: 1
       , company: 1
       , created_at: 1
+      , activated_at: 1
     }
 
     var query = Job
@@ -28,7 +29,7 @@ module.exports = function(app, middleware) {
       if (err) {
         res.send(500)
       } else {
-        var thirtyDaysAgo = (new Date()) - (30 * 24 * 3600 * 1000)
+        var thirtyDaysAgo = new Date(new Date() - (30 * 24 * 3600 * 1000))
         var activeJobs = []
         var inactiveJobs = []
 
@@ -42,7 +43,7 @@ module.exports = function(app, middleware) {
 
         for (var i = 0; i < jobs.length; i++) { sortJob(jobs[i]) }
 
-        res.render('accounts/postings', {
+        res.render('accounts/jobs', {
             title: 'My Postings | LA.js Job Board'
           , activeJobs: activeJobs
           , inactiveJobs: inactiveJobs

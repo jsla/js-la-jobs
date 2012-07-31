@@ -29,6 +29,10 @@ block content
                     = job.location
                   span.created_at
                     time.timeago(datetime=job.created_at.toISOString())
+              td
+                a(href="/jobs/edit/#{job._id}")
+                  | Edit
+
                     
   .jobs.row
       .span12
@@ -37,7 +41,7 @@ block content
           thead
             tr
               td
-                | Not Active
+                | Hidden Postings
           tbody
             each job in inactiveJobs
               tr
@@ -53,4 +57,10 @@ block content
                       = job.location
                     span.created_at
                       time.timeago(datetime=job.created_at.toISOString())
+                td
+                  a(href="/jobs/edit/#{job._id}")
+                    | Edit
+                td
+                  a(href="/jobs/activate/#{job._id}")
+                    | Activate
                     

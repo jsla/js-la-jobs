@@ -3,11 +3,17 @@ var markdown = require('markdown').markdown.toHTML;
 
 var Job = require('../models/job')
 
-module.exports = function(app, middleware) {
+module.exports = function(app, helpers) {
   
   app.get('/jobs', function(req, res) {
+    var thirtyDaysAgo = helpers.getThirtyDaysAgo()
 
-    var conditions = {}
+    var conditions = {
+        activated_at: {$gte: thirtyDaysAgo}
+    }
+
+    console.log(conditions)
+
     var sort = 'created_at'
 
     var fields = {
@@ -18,9 +24,11 @@ module.exports = function(app, middleware) {
     }
 
     var query = Job
-      .where(conditions)
+      .find(conditions)
       .select(fields)
       .sort(sort,-1)
+
+    console.log(query)
 
     query.exec(function(err, jobs) {
       if (err) {
@@ -32,11 +40,11 @@ module.exports = function(app, middleware) {
 
   });
 
-  app.get('/jobs/new', middleware.auth, function(req, res) {
+  app.get('/jobs/new', helpers.auth, function(req, res) {
     res.render('jobs/new', {title: 'New Posting | LA.js Job Board'});
   });
 
-  app.post('/jobs/create', middleware.auth, function(req, res) {
+  app.post('/jobs/create', helpers.auth, function(req, res) {
     var job = new Job(req.body)
     job.created_at = new Date()
     job.created_by = req.session.currentUser
@@ -44,6 +52,43 @@ module.exports = function(app, middleware) {
     res.redirect('/')
   });
 
+  app.post('/jobs/edit/:id', function(req, res) {
+    var conditions = {
+        created_by: req.session.currentUser
+      , _id: req.params.id
+    }
+
+    var update = req.body
+
+    Job.update(conditions, update, function(err, nAffected) {
+      if (err) {
+        res.send(500)
+      } else {
+        res.redirect('/my/jobs')
+      }
+    })
+  })
+
+  app.get('/jobs/edit/:id', function(req, res) {
+    var conditions = {
+        created_by: req.session.currentUser
+      , _id: req.params.id
+    }
+
+    Job.find(conditions, function(err, docs) {
+      var job = docs[0]
+      if (job) {
+        res.render('jobs/edit', {
+            title: 'Edit Job'
+          , job: job
+        })
+      } else {
+        res.send(404)
+      }
+    })
+
+  })
+  
   app.get('/jobs/:id', function(req, res) {
 
     Job.findById(req.params.id, function(err, job) {

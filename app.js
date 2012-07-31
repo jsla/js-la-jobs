@@ -34,7 +34,7 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-var middleware = {
+var helpers = {
   auth: function(req, res, next) {
     if (req.session.currentUser) {
       next()  
@@ -42,11 +42,14 @@ var middleware = {
       req.session.desiredUrl = req.url
       res.redirect('/login')
     }
+  },
+  getThirtyDaysAgo: function() {
+    return new Date(new Date() - (30 * 24 * 3600 * 1000))
   }
 }
 
-accounts(app, middleware)
-jobs(app, middleware)
+accounts(app, helpers)
+jobs(app, helpers)
 
 app.get('/', function(req, res) { res.redirect('/jobs') })
 
