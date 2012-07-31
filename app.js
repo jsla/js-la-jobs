@@ -8,7 +8,8 @@ var express = require('express')
   , accounts = require('./routes/accounts')
   , http = require('http')
   , path = require('path')
-  , mongoose = require('mongoose');
+  , mongoose = require('mongoose')
+  , RedisStore = require('connect-redis')(express);
 
 var app = express();
 
@@ -20,7 +21,8 @@ app.configure(function(){
   app.use(express.logger('dev'));
   app.use(express.cookieParser());
   app.use(express.session({
-    secret: "the joined advice reads across whatever reserved"
+      secret: "the joined advice reads across whatever reserved"
+    , store: new RedisStore
   }))
   app.use(express.bodyParser());
   app.use(express.methodOverride());

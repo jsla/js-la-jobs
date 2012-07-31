@@ -10,6 +10,7 @@
     "jade": "*",
     "markdown": "~0.4.0",
     "mongoose": "~2.7.2",
-    "request": "~2.9.203"
+    "request": "~2.9.203",
+    "connect-redis": "~1.4.1"
   }
 }

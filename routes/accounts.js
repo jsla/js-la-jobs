@@ -6,7 +6,10 @@ module.exports = function(app, middleware) {
 
   app.get('/my/postings', middleware.auth, function(req, res) {
 
-    var conditions = {}
+    var conditions = {
+        created_by: req.session.currentUser
+    }
+
     var sort = 'created_at'
 
     var fields = {
@@ -25,7 +28,25 @@ module.exports = function(app, middleware) {
       if (err) {
         res.send(500)
       } else {
-        res.render('accounts/postings', {title: 'My Postings | LA.js Job Board'})
+        var thirtyDaysAgo = (new Date()) - (30 * 24 * 3600 * 1000)
+        var activeJobs = []
+        var inactiveJobs = []
+
+        var sortJob = function(job) {
+          if (job.activated_at > thirtyDaysAgo) {
+            activeJobs.push(job)
+          } else {
+            inactiveJobs.push(job)
+          }
+        }
+
+        for (var i = 0; i < jobs.length; i++) { sortJob(jobs[i]) }
+
+        res.render('accounts/postings', {
+            title: 'My Postings | LA.js Job Board'
+          , activeJobs: activeJobs
+          , inactiveJobs: inactiveJobs
+        })
       }  
     })
 

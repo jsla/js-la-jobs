@@ -6,3 +6,51 @@ block content
     h1 My Postings
     
     
+  .jobs.row
+    .span12
+  
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            td
+              | Your Active Postings
+        tbody
+          each job in activeJobs
+            tr
+              td
+                a(href="/jobs/#{job._id}")
+                  span.position
+                    = job.position
+                  span.filler at
+                  span.company
+                    = job.company
+                  span.filler in
+                  span.location
+                    = job.location
+                  span.created_at
+                    time.timeago(datetime=job.created_at.toISOString())
+                    
+  .jobs.row
+      .span12
+    
+        table.table.table-striped.table-bordered
+          thead
+            tr
+              td
+                | Not Active
+          tbody
+            each job in inactiveJobs
+              tr
+                td
+                  a(href="/jobs/#{job._id}")
+                    span.position
+                      = job.position
+                    span.filler at
+                    span.company
+                      = job.company
+                    span.filler in
+                    span.location
+                      = job.location
+                    span.created_at
+                      time.timeago(datetime=job.created_at.toISOString())
+                    
