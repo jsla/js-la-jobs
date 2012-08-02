@@ -1,6 +1,9 @@
 var fs = require('fs');
 var markdown = require('markdown').markdown.toHTML;
 
+var stripeApiKey = 'nkYIwfJ2XLrFWMPZRzgkrldX4qXE5bEV'
+var stripe = require('stripe')(stripeApiKey)
+
 var Job = require('../models/job')
 
 module.exports = function(app, helpers) {
@@ -81,22 +84,69 @@ module.exports = function(app, helpers) {
 
   })
 
-  app.get('/jobs/activate/:id', function(req, res) {
+  app.get('/jobs/activate/:id', helpers.auth, function(req, res) {
     var conditions = {
         created_by: req.session.currentUser
       , _id: req.params.id
     }
+
+    Job.findOne(conditions, function(err, job) {
+      if (err) {
+        res.send(500)
+      } else if (!job) {
+        res.send(404)
+      } else {
+        res.render('jobs/activate', {
+            title: 'Activate Posting | LA.js Job Board'
+          , job: job
+        })
+      }
+    })
+  })
+
+  app.post('/jobs/activate/:id', function(req, res) {
+    var stripeToken = req.body.stripeToken
+
+    var conditions = {
+        created_by: req.session.currentUser
+      , _id: req.params.id
+      , activated_at: {$exists: false}
+    }
+
     var update = {
         activated_at: new Date
     }
 
-    Job.update(conditions, update, function(err, nAffected) {
+    var chargeOpts = {
+        amount: 30000
+      , currency: 'usd'
+      , card: stripeToken
+      , description: req.session.currentUser
+    }
+
+    var chargeCallback = function(err, response) {
       if (err) {
+        console.log(err)
         res.send(500)
       } else {
-        res.redirect('/my/jobs')
+        console.log('response', response)
+
+        Job.update(conditions, update, function(err, nAffected) {
+          if (err) {
+            console.log(err)
+            res.send(500)
+          } else {
+            res.redirect('/my/jobs')
+          }
+        })
+
       }
-    })
+    }
+
+    var charge = stripe.charges.create(chargeOpts, chargeCallback)
+
+    
+
   })
   
   app.get('/jobs/:id', function(req, res) {

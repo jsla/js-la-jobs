@@ -1,0 +1,42 @@
+extends ../layout
+
+block content
+  .row
+    .span12
+      .site
+        h3 LA.js Jobs
+      .back
+        a(href='/jobs') Back to Jobs
+
+  .job
+    .summary.page-header
+      .position
+        h1= job.position
+      .company
+        h2= job.company
+      .location
+        h3= job.location
+      .url
+        a(href=job.company_url)
+          = job.company_url
+      .created_at
+        | posted 
+        time.timeago(datetime=job.created_at.toISOString())
+
+  form(action='', method='POST', class='payment-form')
+    .form-row
+      <label>Card Number</label>
+      <input type='text' size='20' autocomplete='off' class='card-number'/>
+    
+    .form-row
+      <label>CVC</label>
+      <input type='text' size='4' autocomplete='off' class='card-cvc'/>
+
+    .form-row
+      label Expiration (MM/YYYY)
+      input(type='text', size='2', class='card-expiry-month')
+      span /
+      input(type='text', size='4', class='card-expiry-year')
+    
+    button(type='submit', class='submit-button') Submit Payment
+  
