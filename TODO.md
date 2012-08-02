@@ -10,3 +10,5 @@ In no particular order
 * Postings should have tags
 * New postings should ensure valid fields
 * Postings list should be paginated
+* Errors should be logged/counted
+* Site should be integrated with analytics (Google, etc..)
