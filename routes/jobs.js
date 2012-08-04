@@ -92,6 +92,7 @@ module.exports = function(app, helpers) {
 
     Job.findOne(conditions, function(err, job) {
       if (err) {
+        console.log(err)
         res.send(500)
       } else if (!job) {
         res.send(404)

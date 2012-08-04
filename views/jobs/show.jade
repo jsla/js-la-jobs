@@ -1,12 +1,10 @@
 extends ../layout
 
-block content
-  .row
-    .span12
-      .site
-        h3 LA.js Jobs
-      .back
-        a(href='/jobs') Back to Jobs
+append header
+  .back
+    a(href='/jobs') Back to Jobs
+
+block content    
 
   .job
     .summary.page-header

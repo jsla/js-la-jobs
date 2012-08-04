@@ -1,12 +1,10 @@
 extends ../layout
 
+append header
+  .back
+    a(href='/my/jobs') Back to My Jobs
+
 block content
-  .row
-    .span12
-      .site
-        h3 LA.js Jobs
-      .back
-        a(href='/jobs') Back to Jobs
 
   .job
     .summary.page-header
@@ -23,20 +21,20 @@ block content
         | posted 
         time.timeago(datetime=job.created_at.toISOString())
 
-  form(action='', method='POST', class='payment-form')
-    .form-row
-      label Card Number
-      input(type='text', size='20', autocomplete='off', class='card-number')
-    
-    .form-row
-      label CVC
-      input(type='text' size='4' autocomplete='off' class='card-cvc')
+    form(action='', method='POST', class='payment-form')
+      .form-row
+        label Card Number
+        input(type='text', size='20', autocomplete='off', class='card-number')
+      
+      .form-row
+        label CVC
+        input(type='text', size='4', autocomplete='off', class='card-cvc')
 
-    .form-row
-      label Expiration (MM/YYYY)
-      input(type='text', size='2', class='card-expiry-month')
-      span /
-      input(type='text', size='4', class='card-expiry-year')
+      .form-row
+        label Expiration (MM/YYYY)
+        input(type='text', size='2', class='card-expiry-month')
+        span /
+        input(type='text', size='4', class='card-expiry-year')
+      
+      button(type='submit', class='submit-button') Submit Payment
     
-    button(type='submit', class='submit-button') Submit Payment
-  

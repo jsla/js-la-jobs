@@ -54,10 +54,6 @@ module.exports = function(app, helpers) {
     
   })
 
-  app.get('/login', function(req, res) {
-    res.render('accounts/login', {title: 'Account Login | LA.js Job Board'})
-  })
-
   app.post('/login', function(req, res) {
     var token = req.body.token
 
