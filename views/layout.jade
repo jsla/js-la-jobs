@@ -1,26 +1,16 @@
 doctype 5
 html
-  head
-    title= title
-    
-    link(rel='stylesheet', href='/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/bootstrap-responsive.min.css')
-
-    link(rel='stylesheet', href='/css/style.css')
+  include includes/head
 
   body
     .container
+      block header
+        include includes/header
+
+      #main
         block content
+      #footer
+        block footer
 
-
-    script(src='https://login.persona.org/include.js')
-    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-    script(src='http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.4/bootstrap.min.js')
-
-    script(src='https://js.stripe.com/v1/')
-    script(type='text/javascript')
-      Stripe.setPublishableKey('pk_05DZzfxqFiSJFgjCtMSsaI7rt9YNE');
+    include includes/scripts
     
-    script(src='/js/vendor/timeago.js')
-    
-    script(src='/js/main.js')

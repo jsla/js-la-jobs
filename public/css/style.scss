@@ -3,12 +3,20 @@ body {
   // "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+a {
+  cursor: pointer;
+}
+
 textarea.posting_body {
   height: 300px;
 }
 
-.new {
-  float: right;
+#header {
+
+  .user {
+    float: right;
+  }
+
 }
 
 .jobs {

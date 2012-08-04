@@ -1,10 +1,13 @@
 body {
   font-size: 14px; }
 
+a {
+  cursor: pointer; }
+
 textarea.posting_body {
   height: 300px; }
 
-.new {
+#header .user {
   float: right; }
 
 .jobs a:hover {

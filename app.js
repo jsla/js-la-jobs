@@ -13,6 +13,11 @@ var express = require('express')
 
 var app = express();
 
+setUser = function(req, res, next) {
+  app.locals.currentUser = req.session.currentUser
+  next()
+}
+
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
@@ -24,6 +29,7 @@ app.configure(function(){
       secret: "the joined advice reads across whatever reserved"
     , store: new RedisStore
   }))
+  app.use(setUser)
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -33,6 +39,9 @@ app.configure(function(){
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
+
+
+
 
 var helpers = {
   auth: function(req, res, next) {
