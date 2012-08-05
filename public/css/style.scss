@@ -13,6 +13,13 @@ textarea.posting_body {
 
 #header {
 
+  .logo {
+    a {
+      text-decoration: none;
+      color: #444;
+    }
+  }
+
   .user {
     float: right;
   }

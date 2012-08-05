@@ -7,6 +7,9 @@ a {
 textarea.posting_body {
   height: 300px; }
 
+#header .logo a {
+  text-decoration: none;
+  color: #444; }
 #header .user {
   float: right; }
 
