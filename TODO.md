@@ -2,14 +2,17 @@
 
 In no particular order
 
-* Views should be dry'd up, partials could de-dupe some markup
 * Postings should have "how to apply"
-* Postings should be searchable
 * Postings should have tags
+* Postings should display company logo (if available)
+
 * New postings should ensure valid fields
-* Postings list should be paginated
-* Errors should be logged/counted
-* Site should be integrated with analytics (Google, etc..)
-* Stripe keys should live outside codebase
-* Posting should display company logo (if available)
 * Flash/status messages should show successful/unsuccessful actions
+
+* Postings list should be searchable
+* Postings list should be paginated
+
+* Site errors should be logged/counted
+* Site should be integrated with analytics (Google, internal, mixpanel, etc..)
+
+* Stripe keys should live outside codebase
