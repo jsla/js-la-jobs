@@ -3,6 +3,7 @@
 In no particular order
 
 * Views should be dry'd up, partials could de-dupe some markup
+* Postings should have "how to apply"
 * Postings should be searchable
 * Postings should have tags
 * New postings should ensure valid fields
