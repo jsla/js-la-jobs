@@ -41,8 +41,6 @@ app.configure('development', function(){
 });
 
 
-
-
 var helpers = {
   auth: function(req, res, next) {
     if (req.session.currentUser) {
