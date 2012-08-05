@@ -1,0 +1,35 @@
+fieldset
+  .control-group
+    label.control-label(for='company') Company Name: 
+    .controls
+      input.input-xlarge(type='text', name='company', value=job.company, placeholder='Company Inc.')
+  
+  .control-group
+    label.control-label(for='company_url') Company Website: 
+    .controls
+      input.input-xlarge(type='text', name='company_url', value=job.company_url, placeholder='http://companyinc.com')
+  
+  .control-group
+    label.control-label(for='logo_url') Company Logo (url): 
+    .controls
+      input.input-xlarge(type='text', name='logo_url', value=job.logo_url, placeholder='http://companyinc.com/logo.png')
+  
+  .control-group
+    label.control-label(for='location') Location: 
+    .controls
+      input.input-xlarge(type='text', name='location', value=job.location, placeholder='Hollywood')
+  
+  .control-group
+    label.control-label(for='position') Position: 
+    .controls
+      input.input-xlarge(type='text', name='position', value=job.position, placeholder='Front-End Engineer')
+  
+  .control-group
+    label.control-label(for='body') Post: 
+    .controls
+      textarea.posting_body(name='body', value=job.body).input-xlarge
+
+  .form-actions
+    button(type='submit', class='btn btn-primary') Submit Job Posting
+    
+

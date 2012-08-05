@@ -36,7 +36,7 @@ module.exports = function(app, helpers) {
   });
 
   app.get('/jobs/new', helpers.auth, function(req, res) {
-    res.render('jobs/new', {title: 'New Posting | LA.js Job Board'});
+    res.render('jobs/new', {title: 'New Posting | LA.js Job Board', job: {}});
   });
 
   app.post('/jobs/create', helpers.auth, function(req, res) {

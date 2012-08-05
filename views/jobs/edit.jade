@@ -10,39 +10,4 @@ block content
     .new-job.span12 
     
       form.well.form-horizontal(method='POST', action='/jobs/edit/'+job._id)
-        fieldset
-          .control-group
-            label.control-label(for='company') Company Name: 
-            .controls
-              input.input-xlarge(type='text', name='company', value=job.company )
-          
-          .control-group
-            label.control-label(for='company_url') Company Website: 
-            .controls
-              input.input-xlarge(type='text', name='company_url', value=job.company_url)
-          
-          .control-group
-            label.control-label(for='logo_url') Company Logo (url): 
-            .controls
-              input.input-xlarge(type='text', name='logo_url', value=job.logo_url)
-          
-          .control-group
-            label.control-label(for='location') Location: 
-            .controls
-              input.input-xlarge(type='text', name='location', value=job.location)
-          
-          .control-group
-            label.control-label(for='position') Position: 
-            .controls
-              input.input-xlarge(type='text', name='position', value=job.position)
-          
-          .control-group
-            label.control-label(for='body') Post: 
-            .controls
-              textarea.posting_body(name='body').input-xlarge
-                = job.body
-
-          .form-actions
-            button(type='submit', class='btn btn-primary') Edit Job Posting
-            
-
+        include includes/fields

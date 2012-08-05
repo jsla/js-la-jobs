@@ -13,40 +13,6 @@ block content
 
   .row
     .new-job.span12 
-    
+      
       form.well.form-horizontal(method='POST', action='/jobs/create')
-        fieldset
-          .control-group
-            label.control-label(for='company') Company Name: 
-            .controls
-              input.input-xlarge(type='text', name='company', placeholder='Company Inc.')
-          
-          .control-group
-            label.control-label(for='company_url') Company Website: 
-            .controls
-              input.input-xlarge(type='text', name='company_url', placeholder='http://companyinc.com')
-          
-          .control-group
-            label.control-label(for='logo_url') Company Logo (url): 
-            .controls
-              input.input-xlarge(type='text', name='logo_url', placeholder='http://companyinc.com/logo.png')
-          
-          .control-group
-            label.control-label(for='location') Location: 
-            .controls
-              input.input-xlarge(type='text', name='location', placeholder='Hollywood')
-          
-          .control-group
-            label.control-label(for='position') Position: 
-            .controls
-              input.input-xlarge(type='text', name='position', placeholder='Front-End Engineer')
-          
-          .control-group
-            label.control-label(for='body') Post: 
-            .controls
-              textarea.posting_body(name='body').input-xlarge
-
-          .form-actions
-            button(type='submit', class='btn btn-primary') Submit Job Posting
-            
-
+        include includes/fields
