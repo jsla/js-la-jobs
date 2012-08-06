@@ -11,7 +11,7 @@ set :user, "deploy"                               # user to ssh in as
 set :use_sudo, false
 set :ssh_options, { :forward_agent => true }
 
-set :node_file, "server.js"                  # this is the entry point to your app that should run as a deamon
+set :node_file, "app.js"                  # this is the entry point to your app that should run as a deamon
 
 set :deploy_to, "/home/#{user}/#{application}" 
 set :deploy_via, :remote_cache
