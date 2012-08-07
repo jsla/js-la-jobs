@@ -12,6 +12,7 @@ fieldset
   .control-group
     label.control-label(for='logo_url') Company Logo (url): 
     .controls
+      - console.log(job.logo_url)      
       input.input-xlarge(type='text', name='logo_url', value=job.logo_url, placeholder='http://companyinc.com/logo.png')
   
   .control-group
@@ -27,7 +28,14 @@ fieldset
   .control-group
     label.control-label(for='body') Post: 
     .controls
-      textarea.posting_body(name='body', value=job.body).input-xlarge
+      textarea.posting_body(name='body').input-xlarge
+        = job.body
+
+  .control-group
+    label.control-label(for='how_to_apply') How To Apply:
+    .controls
+      textarea.posting_how_to_appy(name='how_to_apply', placeholder='Send resume/site/github to alex@company.com').input-xlarge
+        = job.how_to_apply
 
   .form-actions
     button(type='submit', class='btn btn-primary') Submit Job Posting
