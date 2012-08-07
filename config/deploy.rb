@@ -76,7 +76,7 @@ namespace :deploy do
       export NODE_ENV="#{node_env}"
       cd #{current_path}
 
-      exec sudo -u #{admin_runner} sh -c "LOG_PATH=#{log_path} APP_HOST=#{app_host} NODE_ENV=#{node_env} PORT=#{application_port} #{application_binary} #{current_path}/#{node_file}"
+      exec sudo -u #{admin_runner} sh -c "NODE_ENV=#{node_env} PORT=#{application_port} #{application_binary} #{current_path}/#{node_file} >> #{log_path} 2>&1"
   end script
   respawn
 UPSTART
