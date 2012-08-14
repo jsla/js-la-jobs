@@ -2,7 +2,6 @@
 
 In no particular order
 
-* Postings should have "how to apply"
 * Postings should have tags
 * Postings should display company logo (if available)
 
