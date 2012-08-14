@@ -48,7 +48,7 @@ var helpers = {
       next()  
     } else {
       req.session.desiredUrl = req.url
-      res.redirect('/login')
+      res.redirect('/')
     }
   },
   getThirtyDaysAgo: function() {
