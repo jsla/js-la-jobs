@@ -1,4 +1,5 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development'
+
 /**
  * Module dependencies.
  */
@@ -11,7 +12,7 @@ var express = require('express')
   , mongoose = require('mongoose')
   , RedisStore = require('connect-redis')(express);
 
-var app = express();
+var app = express()
 
 setUser = function(req, res, next) {
   app.locals.currentUser = req.session.currentUser
@@ -63,3 +64,5 @@ app.get('/', function(req, res) { res.redirect('/jobs') })
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
+
+module.exports = app
