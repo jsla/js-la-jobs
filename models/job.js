@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-mongoose.connect('mongodb://localhost/jsla_jobs');
+mongoose.connect('mongodb://localhost/jsla_jobs'+'-'+process.env.NODE_ENV);
 
 var JobSchema = new Schema({
     company: String
