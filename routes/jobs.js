@@ -36,15 +36,29 @@ module.exports = function(app, helpers) {
   });
 
   app.get('/jobs/new', helpers.auth, function(req, res) {
-    res.render('jobs/new', {title: 'New Posting | LA.js Job Board', job: {}});
-  });
+    var job = req.flash('job')[0] || {} 
+    var errors = req.flash('errors')[0] || {} 
+
+    res.render('jobs/new', {
+        title: 'New Posting | LA.js Job Board'
+      , job: job
+      , errors: errors
+    })
+  })
 
   app.post('/jobs/create', helpers.auth, function(req, res) {
     var job = new Job(req.body)
     job.created_at = new Date()
     job.created_by = req.session.currentUser
-    job.save()
-    res.redirect('/')
+    job.save(function(err) {
+      if (err) {
+        req.flash('job', job)
+        req.flash('errors', err.errors)
+        res.redirect('/jobs/new')
+      } else {
+        res.redirect('/')
+      }
+    })
   });
 
   app.post('/jobs/edit/:id', function(req, res) {

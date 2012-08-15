@@ -10,7 +10,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
-  , RedisStore = require('connect-redis')(express);
+  , RedisStore = require('connect-redis')(express)
+  , flash = require('connect-flash');
 
 var app = express()
 
@@ -30,6 +31,7 @@ app.configure(function(){
       secret: "the joined advice reads across whatever reserved"
     , store: new RedisStore
   }))
+  app.use(flash())
   app.use(setUser)
   app.use(express.bodyParser());
   app.use(express.methodOverride());

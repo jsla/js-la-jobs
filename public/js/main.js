@@ -55,6 +55,10 @@
     })
 
     $('.payment-form').submit(paymentSubmit)
+
+    $('.control-group').keydown(function() {
+      $(this).removeClass('error')
+    })
   })
 
 }).call(this)

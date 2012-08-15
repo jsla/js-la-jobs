@@ -1,10 +1,10 @@
 fieldset
-  .control-group
+  .control-group(class=errors.company ? 'error' : '')
     label.control-label(for='company') Company Name: 
     .controls
       input.input-xlarge(type='text', name='company', value=job.company, placeholder='Company Inc.')
   
-  .control-group
+  .control-group(class=errors.company_url ? 'error' : '')
     label.control-label(for='company_url') Company Website: 
     .controls
       input.input-xlarge(type='text', name='company_url', value=job.company_url, placeholder='http://companyinc.com')
@@ -15,23 +15,23 @@ fieldset
       - console.log(job.logo_url)      
       input.input-xlarge(type='text', name='logo_url', value=job.logo_url, placeholder='http://companyinc.com/logo.png')
   
-  .control-group
+  .control-group(class=errors.location ? 'error' : '')
     label.control-label(for='location') Location: 
     .controls
       input.input-xlarge(type='text', name='location', value=job.location, placeholder='Hollywood')
   
-  .control-group
+  .control-group(class=errors.position ? 'error' : '')
     label.control-label(for='position') Position: 
     .controls
       input.input-xlarge(type='text', name='position', value=job.position, placeholder='Front-End Engineer')
   
-  .control-group
+  .control-group(class=errors.body ? 'error' : '')
     label.control-label(for='body') Post: 
     .controls
       textarea.posting_body(name='body').input-xlarge
         = job.body
 
-  .control-group
+  .control-group(class=errors.how_to_apply ? 'error' : '')
     label.control-label(for='how_to_apply') How To Apply:
     .controls
       textarea.posting_how_to_appy(name='how_to_apply', placeholder='Send resume/site/github to alex@company.com').input-xlarge
