@@ -52,7 +52,7 @@ module.exports = function(app, helpers) {
         req.flash('errors', err.errors)
         res.redirect('/jobs/new')
       } else {
-        res.redirect('/')
+        res.redirect('/my/jobs')
       }
     })
   });
