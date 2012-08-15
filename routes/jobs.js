@@ -15,15 +15,11 @@ module.exports = function(app, helpers) {
         activated_at: {$gte: thirtyDaysAgo}
     }
 
-    console.log(conditions)
-
     var sort = 'created_at'
 
     var query = Job
       .find(conditions)
       .sort(sort,-1)
-
-    console.log(query)
 
     query.exec(function(err, jobs) {
       if (err) {
