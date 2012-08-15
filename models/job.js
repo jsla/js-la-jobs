@@ -15,6 +15,17 @@ var JobSchema = new Schema({
   , created_by: String
 })
 
+JobSchema.path('company').required(true)
+JobSchema.path('company_url').required(true)
+JobSchema.path('location').required(true)
+JobSchema.path('position').required(true)
+JobSchema.path('body').required(true)
+JobSchema.path('how_to_apply').required(true)
+JobSchema.path('created_by').required(true)
+JobSchema.path('created_at').required(true)
+
 var Job = mongoose.model('Job', JobSchema)
+
+
 
 module.exports = Job
