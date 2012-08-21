@@ -1,4 +1,4 @@
-# TODO #
+# TODO
 
 In no particular order
 
@@ -15,3 +15,13 @@ In no particular order
 * Site should be integrated with analytics (Google, internal, mixpanel, etc..)
 
 * Stripe keys should live outside codebase
+
+## JMD
+
+* I left in all bootstrap less files just in case we want to add any other magic - the build does not use it all
+* The bootstrap JS needs to be optimized to eleminate extra plugins
+* Mobile still needs some love ;)
+* Multi-user seed data would be helpful for dev
+* Inactive posts can be viewed by anyone?
+* Signout option?
+* If we use jobs.js.la/ can we get rid of the redirect to /jobs?
