@@ -1,20 +1,23 @@
-#header
-  .user
-    if currentUser
-      span.my-jobs
-        a(href='/my/jobs') View My Jobs 
-      | or 
-      span.new
-        a(href='/jobs/new') Create a Job Posting 
-    else
-      span.login
-        a Sign In 
-      | or 
-      span.login
-        a Sign Up 
-      | to create a job posting 
-
-  .page-header
-    .logo
-      a(href='/')
-        h1 LA.js Job Board
+.navbar
+  .navbar-inner
+    .container
+      button.btn.btn-navbar(type='button', data-toggle='collapse', data-target='.nav-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.brand(href='/')
+        | Jobs
+        small .js.la
+      .nav-collapse.collapse
+        .navbar-text.pull-right
+          if currentUser
+            a(href='/my/jobs') Manage
+            |  or 
+            a(href='/jobs/new') create a new listing
+          else
+            span.login
+              a Sign In 
+            | or 
+            span.login
+              a Sign Up 
+            | to create a job listing 

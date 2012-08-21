@@ -1,0 +1,54 @@
+.modal#markdown-ref.hide(tabindex='-1', role='dialog', aria-labelledby='markdown-ref-label', aria-hidden='true')
+  .modal-header
+    button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+    h3#markdown-ref-label Markdown Reference
+  .modal-body
+    h4 Headings
+    pre
+      code
+        | # This is an &lt;h1&gt; tag
+        | ## This is an &lt;h2&gt; tag
+        | ###### This is an &lt;h6&gt; tag
+
+    h4 Styles
+    pre
+      code
+        | *This text will be italic*
+        | _This will also be italic_
+        | **This text will be bold**
+        | __This will also be bold__
+        | *You **can** combine them*
+
+    h4 Unordered Lists
+    pre
+      code
+        | * Item 1
+        | * Item 2
+        |   * Item 2a
+        |   * Item 2b
+
+    h4 Ordered Lists
+    pre
+      code
+        | 1. Item 1
+        | 2. Item 2
+        | 3. Item 3
+        |   * Item 3a
+        |   * Item 3b
+
+    h4 Images
+    pre
+      code
+        | ![Logo](http://companyinc/logo.png)
+        | Format: ![Alt Text](url)
+
+    h4 Links
+    pre
+      code
+        | [Company Inc.](http://companyinc.com)
+
+    h4 Blockquotes
+    pre
+      code
+        | What people are saying about us:
+        | > Company Inc. is a fantastic place to work.

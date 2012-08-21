@@ -1,13 +1,9 @@
 extends ../layout
 
 append header
-  .back
-    a(href='/my/jobs') Back to My Jobs
 
 block content
 
-  .row
-    .new-job.span12 
-    
-      form.well.form-horizontal(method='POST', action='/jobs/edit/'+job._id)
-        include includes/fields
+  form.form-horizontal(method='POST', action='/jobs/edit/'+job._id)
+    legend Edit Listing
+    include includes/fields

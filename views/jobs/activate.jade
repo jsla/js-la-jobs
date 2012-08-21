@@ -1,40 +1,51 @@
 extends ../layout
 
 append header
-  .back
-    a(href='/my/jobs') Back to My Jobs
 
 block content
 
-  .job
-    .summary.page-header
-      .position
-        h1= job.position
-      .company
-        h2= job.company
-      .location
-        h3= job.location
-      .url
-        a(href=job.company_url)
-          = job.company_url
-      .created_at
-        | posted 
-        time.timeago(datetime=job.created_at.toISOString())
+    .jobs
+      table.table.table-striped
+        tbody
+          tr
+            td
+              a(href="/jobs/#{job._id}")
+                span.position
+                  = job.position
+                span.filler  at 
+                span.company
+                  = job.company
+                span.filler  in 
+                span.location
+                  = job.location
 
-    form(action='', method='POST', class='payment-form')
-      .form-row
-        label Card Number
-        input(type='text', size='20', autocomplete='off', class='card-number')
-      
-      .form-row
-        label CVC
-        input(type='text', size='4', autocomplete='off', class='card-cvc')
+    form.form-horizontal(method='POST', action='', class='payment-form')
+      legend Activate Listing
+      fieldset
+        .control-group
+          label.control-label(for='card-number') Card Number
+          .controls
+            input.input-large(type='text', name='card-number', autocomplete='off', class='card-number', size='20')
 
-      .form-row
-        label Expiration (MM/YYYY)
-        input(type='text', size='2', class='card-expiry-month')
-        span /
-        input(type='text', size='4', class='card-expiry-year')
-      
-      button(type='submit', class='submit-button') Submit Payment
-    
+        .control-group
+          label.control-label(for='card-cvc') CVC
+          .controls
+            input.input-small(type='text', name='card-cvc', autocomplete='off', class='card-cvc', size='4')
+
+        .control-group
+          label.control-label(for='card-expiry') Expiration
+          .controls
+            select.span1.inline(name='card-expiry-month', autocomplete='off', class='card-expiry-month')
+              - for (var i=1; i<13; i++) {
+                option= i.toString().length < 2 ? '0' + i : i
+              - }
+            |  / 
+            // TODO: This should be handled better
+            select.span2.inline(name='card-expiry-year', autocomplete='off', class='card-expiry-year')
+              - for (var j=2012; j<2040; j++) {
+                option= j
+              - }
+
+      .form-actions
+        button.btn.btn-primary(type='submit', class='submit-button') Submit Payment
+

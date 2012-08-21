@@ -2,11 +2,10 @@ extends ../layout
 
 
 block content
-  
-  .jobs.row
-    .span12
 
-      table.table.table-striped.table-bordered
+  #jobslist.jobs
+
+      table.table.table-striped
         each job in jobs
           tr
             td
@@ -21,4 +20,4 @@ block content
                   = job.location
                 span.created_at
                   time.timeago(datetime=job.activated_at.toISOString())
-                
+

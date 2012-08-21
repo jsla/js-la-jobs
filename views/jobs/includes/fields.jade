@@ -1,43 +1,48 @@
 fieldset
   .control-group(class=errors.company ? 'error' : '')
-    label.control-label(for='company') Company Name: 
+    label.control-label(for='company') Company Name:
     .controls
-      input.input-xlarge(type='text', name='company', value=job.company, placeholder='Company Inc.')
-  
+      input.input-xxlarge(type='text', name='company', value=job.company, placeholder='Company Inc.')
+
   .control-group(class=errors.company_url ? 'error' : '')
-    label.control-label(for='company_url') Company Website: 
+    label.control-label(for='company_url') Company Website:
     .controls
-      input.input-xlarge(type='text', name='company_url', value=job.company_url, placeholder='http://companyinc.com')
-  
+      input.input-xxlarge(type='text', name='company_url', value=job.company_url, placeholder='http://companyinc.com')
+
   .control-group
-    label.control-label(for='logo_url') Company Logo (url): 
+    label.control-label(for='logo_url') Company Logo (url):
     .controls
-      - console.log(job.logo_url)      
-      input.input-xlarge(type='text', name='logo_url', value=job.logo_url, placeholder='http://companyinc.com/logo.png')
-  
+      - console.log(job.logo_url)
+      input.input-xxlarge(type='text', name='logo_url', value=job.logo_url, placeholder='http://companyinc.com/logo.png')
+
   .control-group(class=errors.location ? 'error' : '')
-    label.control-label(for='location') Location: 
+    label.control-label(for='location') Location:
     .controls
-      input.input-xlarge(type='text', name='location', value=job.location, placeholder='Hollywood')
-  
+      input.input-xxlarge(type='text', name='location', value=job.location, placeholder='Hollywood')
+
   .control-group(class=errors.position ? 'error' : '')
-    label.control-label(for='position') Position: 
+    label.control-label(for='position') Position:
     .controls
-      input.input-xlarge(type='text', name='position', value=job.position, placeholder='Front-End Engineer')
-  
+      input.input-xxlarge(type='text', name='position', value=job.position, placeholder='Front-End Engineer')
+
   .control-group(class=errors.body ? 'error' : '')
-    label.control-label(for='body') Post: 
+    label.control-label(for='body') Post:
     .controls
-      textarea.posting_body(name='body').input-xlarge
+      textarea.posting_body(name='body').input-xxlarge
         = job.body
+      p.help-block
+        small
+          | Markdown can be used to add formatting. 
+          a.btn.btn-mini#markdown-ref-button(role="button", data-toggle='modal', data-target='#markdown-ref')
+            i.icon-info-sign
 
   .control-group(class=errors.how_to_apply ? 'error' : '')
     label.control-label(for='how_to_apply') How To Apply:
     .controls
-      textarea.posting_how_to_appy(name='how_to_apply', placeholder='Send resume/site/github to alex@company.com').input-xlarge
+      textarea.posting_how_to_appy(name='how_to_apply', placeholder='Send resume/site/github to alex@company.com').input-xxlarge
         = job.how_to_apply
 
   .form-actions
-    button(type='submit', class='btn btn-primary') Submit Job Posting
-    
+    button.btn.btn-primary(type='submit') Submit
 
+include markdown-reference

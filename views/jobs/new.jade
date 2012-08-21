@@ -2,17 +2,8 @@ extends ../layout
 
 append header
 
-  .back
-    a(href='/my/jobs') Back to My Jobs
-
 block content
-        
-  .page-header
-    h2 New Job Posting
-    p Create your new posting here
 
-  .row
-    .new-job.span12 
-      
-      form.well.form-horizontal(method='POST', action='/jobs/create')
-        include includes/fields
+  form.form-horizontal(method='POST', action='/jobs/create')
+    legend New Listing
+    include includes/fields

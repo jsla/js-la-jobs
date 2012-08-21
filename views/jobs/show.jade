@@ -1,13 +1,12 @@
 extends ../layout
 
 append header
-  .back
-    a(href='/jobs') Back to Jobs
 
-block content    
-
-  .job
+block content
+  .padded-content
     .summary.page-header
+      if (job.logo_url)
+        img.logo.pull-right(src='#{job.logo_url}', style='max-width:160px;max-height:160px;')
       .position
         h1= job.position
       .company
@@ -18,9 +17,21 @@ block content
         a(href=job.company_url)
           = job.company_url
       .created_at
-        | posted 
-        time.timeago(datetime=job.created_at.toISOString())
+        p
+          small
+            | posted 
+            time.timeago(datetime=job.created_at.toISOString())
+      .social
+        a(href="https://twitter.com/share", class="twitter-share-button", data-via="losangelesJS", data-count="none") Tweet
+        script
+          !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+        a.email-btn.btn.btn-mini(href=emailLink)
+          i.icon-envelope
+          strong  Email
 
-    .body.row
-      .span12
-        != body
+    != body
+
+    hr
+
+    h4 How to apply
+    p= job.how_to_apply

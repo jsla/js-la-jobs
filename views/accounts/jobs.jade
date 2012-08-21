@@ -1,22 +1,17 @@
 extends ../layout
 
 append header
-  .back
-    a(href='/jobs') Back to All Jobs
 
-block content    
-  
-  .page-header
-    h1 My Postings
+block content
 
-  .jobs.row
-    .span12
-  
-      table.table.table-striped.table-bordered
+  if(activeJobs.length)
+    .jobs
+
+      table.table.table-striped
         thead
           tr
-            td
-              | Your Active Postings
+            th
+              | Active Listings
         tbody
           each job in activeJobs
             tr
@@ -36,35 +31,35 @@ block content
                 a(href="/jobs/edit/#{job._id}")
                   | Edit
 
-                    
-  .jobs.row
-      .span12
-    
-        table.table.table-striped.table-bordered
-          thead
+
+  if(inactiveJobs.length)
+    .jobs
+
+      table.table.table-striped
+        thead
+          tr
+            th
+              | Inactive Listings
+        tbody
+          each job in inactiveJobs
             tr
               td
-                | Hidden Postings
-          tbody
-            each job in inactiveJobs
-              tr
-                td
-                  a(href="/jobs/#{job._id}")
-                    span.position
-                      = job.position
-                    span.filler at
-                    span.company
-                      = job.company
-                    span.filler in
-                    span.location
-                      = job.location
-                    if job.activated_at
-                      span.created_at
-                        time.timeago(datetime=job.activated_at.toISOString())
-                td
-                  a(href="/jobs/edit/#{job._id}")
-                    | Edit
-                td
-                  a(href="/jobs/activate/#{job._id}")
-                    | Activate
-                    
+                a(href="/jobs/#{job._id}")
+                  span.position
+                    = job.position
+                  span.filler at
+                  span.company
+                    = job.company
+                  span.filler in
+                  span.location
+                    = job.location
+                  if job.activated_at
+                    span.created_at
+                      time.timeago(datetime=job.activated_at.toISOString())
+              td
+                a(href="/jobs/edit/#{job._id}")
+                  | Edit
+              td
+                a(href="/jobs/activate/#{job._id}")
+                  | Activate
+
