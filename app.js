@@ -11,7 +11,8 @@ var express = require('express')
   , path = require('path')
   , mongoose = require('mongoose')
   , RedisStore = require('connect-redis')(express)
-  , flash = require('connect-flash');
+  , lessMiddleware = require('less-middleware')
+  , flash = require('connect-flash')
 
 var app = express()
 
@@ -21,33 +22,37 @@ setUser = function(req, res, next) {
 }
 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.favicon());
-  app.use(express.logger('dev'));
-  app.use(express.cookieParser());
+  app.set('port', process.env.PORT || 3000)
+  app.set('views', __dirname + '/views')
+  app.set('view engine', 'jade')
+  app.use(express.favicon())
+  app.use(express.logger('dev'))
+  app.use(express.cookieParser())
   app.use(express.session({
       secret: "the joined advice reads across whatever reserved"
     , store: new RedisStore
   }))
   app.use(flash())
   app.use(setUser)
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.bodyParser())
+  app.use(express.methodOverride())
+  app.use(app.router)
+  app.use(express.static(path.join(__dirname, 'public')))
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-});
-
+  // Only use less middleware locally, the css should be rebuilt before deploy
+  app.use(lessMiddleware({
+    src: __dirname + '/public',
+    compress: true
+  }))
+})
 
 var helpers = {
   auth: function(req, res, next) {
     if (req.session.currentUser) {
-      next()  
+      next()
     } else {
       req.session.desiredUrl = req.url
       res.redirect('/')
@@ -55,7 +60,8 @@ var helpers = {
   },
   getThirtyDaysAgo: function() {
     return new Date(new Date() - (30 * 24 * 3600 * 1000))
-  }
+  },
+  siteTitle: 'JOBS.js.la'
 }
 
 accounts(app, helpers)
@@ -64,7 +70,7 @@ jobs(app, helpers)
 app.get('/', function(req, res) { res.redirect('/jobs') })
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+  console.log('Express server listening on port ' + app.get('port'))
 });
 
 module.exports = app
