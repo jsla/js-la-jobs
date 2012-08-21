@@ -25,7 +25,6 @@ module.exports = function(app, helpers) {
       if (err) {
         res.send(500)
       } else {
-        res.render('jobs/index', { title: 'LA.js Job Board', jobs: jobs, currentUser: req.session.currentUser })
         res.render('jobs/index', {
             title: helpers.siteTitle
           , jobs: jobs
