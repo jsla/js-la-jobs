@@ -13,7 +13,8 @@ module.exports = function(app, helpers) {
     var sort = 'created_at'
 
     var fields = {
-        location: 1
+        created_by: 1
+      , location: 1
       , position: 1
       , company: 1
       , created_at: 1
@@ -21,7 +22,7 @@ module.exports = function(app, helpers) {
     }
 
     var query = Job
-      .where(conditions)
+      .find(conditions)
       .select(fields)
       .sort(sort,-1)
 
@@ -44,21 +45,20 @@ module.exports = function(app, helpers) {
         for (var i = 0; i < jobs.length; i++) { sortJob(jobs[i]) }
 
         res.render('accounts/jobs', {
-            title: 'My Postings | LA.js Job Board'
+            title: 'Manage Listings | ' + helpers.siteTitle
           , activeJobs: activeJobs
           , inactiveJobs: inactiveJobs
         })
-      }  
+      }
     })
 
-    
   })
 
   app.post('/login', function(req, res) {
     var token = req.body.token
 
     var audience = 'http://' + req.headers.host
-    
+
     var reqOpts = {
         url: 'https://browserid.org/verify'
       , method: 'POST'

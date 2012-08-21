@@ -7,7 +7,7 @@ var stripe = require('stripe')(stripeApiKey)
 var Job = require('../models/job')
 
 module.exports = function(app, helpers) {
-  
+
   app.get('/jobs', function(req, res) {
     var thirtyDaysAgo = helpers.getThirtyDaysAgo()
 
@@ -26,17 +26,22 @@ module.exports = function(app, helpers) {
         res.send(500)
       } else {
         res.render('jobs/index', { title: 'LA.js Job Board', jobs: jobs, currentUser: req.session.currentUser })
+        res.render('jobs/index', {
+            title: helpers.siteTitle
+          , jobs: jobs
+          , currentUser: req.session.currentUser
+        })
       }
     })
 
-  });
+  })
 
   app.get('/jobs/new', helpers.auth, function(req, res) {
-    var job = req.flash('job')[0] || {} 
-    var errors = req.flash('errors')[0] || {} 
+    var job = req.flash('job')[0] || {}
+    var errors = req.flash('errors')[0] || {}
 
     res.render('jobs/new', {
-        title: 'New Posting | LA.js Job Board'
+        title: 'New Listing | ' + helpers.siteTitle
       , job: job
       , errors: errors
     })
@@ -55,7 +60,7 @@ module.exports = function(app, helpers) {
         res.redirect('/my/jobs')
       }
     })
-  });
+  })
 
   app.post('/jobs/edit/:id', function(req, res) {
     var conditions = {
@@ -80,12 +85,15 @@ module.exports = function(app, helpers) {
       , _id: req.params.id
     }
 
+    var errors = req.flash('errors')[0] || {}
+
     Job.find(conditions, function(err, docs) {
       var job = docs[0]
       if (job) {
         res.render('jobs/edit', {
-            title: 'Edit Job'
+            title: 'Edit Listing | ' + helpers.siteTitle
           , job: job
+          , errors: errors
         })
       } else {
         res.send(404)
@@ -100,6 +108,8 @@ module.exports = function(app, helpers) {
       , _id: req.params.id
     }
 
+    var errors = req.flash('errors')[0] || {}
+
     Job.findOne(conditions, function(err, job) {
       if (err) {
         console.log(err)
@@ -108,8 +118,9 @@ module.exports = function(app, helpers) {
         res.send(404)
       } else {
         res.render('jobs/activate', {
-            title: 'Activate Posting | LA.js Job Board'
+            title: 'Activate Posting | ' + helpers.siteTitle
           , job: job
+          , errors: errors // I'm guessing we will implement these?
         })
       }
     })
@@ -150,16 +161,13 @@ module.exports = function(app, helpers) {
             res.redirect('/my/jobs')
           }
         })
-
       }
     }
 
     var charge = stripe.charges.create(chargeOpts, chargeCallback)
 
-    
-
   })
-  
+
   app.get('/jobs/:id', function(req, res) {
 
     Job.findById(req.params.id, function(err, job) {
@@ -168,18 +176,20 @@ module.exports = function(app, helpers) {
         res.send(404)
       } else if (job) {
         var body = markdown(job.body)
+          , email = {
+              subject: job.company + ' is hiring a ' + job.position
+            , body: job.company + ' is hiring a ' + job.position + ' at http://jobs.js.la/jobs/' + job._id
+            }
 
         res.render('jobs/show', {
-            title: 'Front-End Developer | LA.js Job Board'
+            title: 'New Listing | ' + helpers.siteTitle
           , job: job
           , body: body
-        });  
+          , emailLink: 'mailto:?body=' + escape(email.body) + '&subject=' + escape(email.subject)
+        })
       }
-
     })
 
-  });
+  })
 
-
-
-};
+}
