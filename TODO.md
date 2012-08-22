@@ -5,7 +5,6 @@ In no particular order
 * Postings should have tags
 * Postings should display company logo (if available)
 
-* New postings should ensure valid fields
 * Flash/status messages should show successful/unsuccessful actions
 
 * Postings list should be searchable
