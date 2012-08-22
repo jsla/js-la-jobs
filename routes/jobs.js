@@ -181,7 +181,7 @@ module.exports = function(app, helpers) {
             }
 
         res.render('jobs/show', {
-            title: 'New Listing | ' + helpers.siteTitle
+            title: job.position + ' | ' + helpers.siteTitle
           , job: job
           , body: body
           , emailLink: 'mailto:?body=' + escape(email.body) + '&subject=' + escape(email.subject)
