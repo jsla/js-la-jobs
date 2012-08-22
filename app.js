@@ -37,16 +37,18 @@ app.configure(function(){
   app.use(express.bodyParser())
   app.use(express.methodOverride())
   app.use(app.router)
+  // Only run through less middleware for development
+  if (app.settings.env === 'development') {
+    app.use(lessMiddleware({
+      src: __dirname + '/public',
+      compress: true
+    }))
+  }
   app.use(express.static(path.join(__dirname, 'public')))
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
-  // Only use less middleware locally, the css should be rebuilt before deploy
-  app.use(lessMiddleware({
-    src: __dirname + '/public',
-    compress: true
-  }))
 })
 
 var helpers = {
