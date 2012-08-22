@@ -25,3 +25,8 @@ In no particular order
 * Inactive posts can be viewed by anyone?
 * Signout option?
 * If we use jobs.js.la/ can we get rid of the redirect to /jobs?
+* Do we want to handle logo upload/resize?
+* @jslajobs twitter account?
+* RSS feed?
+* Preview button to match edit/activate?
+* More validation on form (i.e invalid urls: "companyinc.com" sans http) 
